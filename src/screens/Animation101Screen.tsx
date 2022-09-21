@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Animated, Button} from 'react-native';
+import HeaderTitle from '../components/HeaderTitle';
 import useAnimation from '../hooks/useAnimation';
 
 const Animation101Screen = () => {
@@ -8,13 +9,13 @@ const Animation101Screen = () => {
 
   return (
     <View style={styles.container}>
+      <HeaderTitle title="Animation 01" />
       <Animated.View
         style={{
           ...styles.box,
           opacity,
           transform: [
             {
-              translateX: position,
               translateY: position,
             },
           ],

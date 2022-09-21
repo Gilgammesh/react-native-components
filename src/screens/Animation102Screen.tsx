@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet, Animated, PanResponder} from 'react-native';
+import HeaderTitle from '../components/HeaderTitle';
 
 const Animation102Screen = () => {
   const pan = useRef(new Animated.ValueXY()).current;
@@ -29,6 +30,7 @@ const Animation102Screen = () => {
 
   return (
     <View style={styles.container}>
+      <HeaderTitle title="Animation 02" />
       <Animated.View
         {...panResponder.panHandlers}
         style={[pan.getLayout(), styles.box]}

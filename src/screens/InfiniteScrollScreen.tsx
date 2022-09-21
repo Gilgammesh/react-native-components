@@ -24,7 +24,7 @@ const InfiniteScrollScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        ListHeaderComponent={() => <HeaderTitle title="Modals" />}
+        ListHeaderComponent={() => <HeaderTitle title="Scroll Infinito" />}
         data={numbers}
         keyExtractor={item => `${item}`}
         renderItem={({item}) => (

@@ -24,6 +24,7 @@ const FlatListMenuItem = ({item: {icon, name, component}}: IProps) => {
           <Icon name={icon} size={20} color="#151512" style={styles.itemIcon} />
           <Text style={styles.itemText}>{name}</Text>
         </View>
+
         <Icon name="chevron-forward-outline" size={20} />
       </View>
     </TouchableOpacity>

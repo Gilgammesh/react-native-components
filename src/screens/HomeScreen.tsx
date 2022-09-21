@@ -14,7 +14,9 @@ const HomeScreen = () => {
           <FlatListMenuItem item={item} />
         )}
         keyExtractor={(item: IMenuItem) => `${item.id}`}
-        ListHeaderComponent={() => <HeaderTitle title="Opciones de Menú" />}
+        ListHeaderComponent={() => (
+          <HeaderTitle title="Opciones de Menú" hideIcon />
+        )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </SafeAreaView>

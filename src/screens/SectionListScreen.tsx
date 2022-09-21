@@ -85,7 +85,7 @@ const SectionListScreen = () => {
         }
         ListHeaderComponent={() => <HeaderTitle title="Section List" />}
         ListFooterComponent={() => (
-          <HeaderTitle title={`Registros: ${data.length}`} />
+          <HeaderTitle title={`Registros: ${data.length}`} hideIcon />
         )}
         sections={data}
         keyExtractor={(item, index) => item + index}
