@@ -1,13 +1,7 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  ScrollView,
-  RefreshControl,
-  Text,
-} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {StyleSheet, SafeAreaView, View, ScrollView, RefreshControl, Text} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
+import {ThemeContext} from '../context/ThemeContext';
 
 interface Data {
   id: number;
@@ -34,6 +28,9 @@ const data: Data[] = [
 ];
 
 const PullToRefreshScreen = () => {
+  const {theme} = useContext(ThemeContext);
+  const {colors} = theme;
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
@@ -52,21 +49,23 @@ const PullToRefreshScreen = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            progressBackgroundColor="#5856d6"
+            progressBackgroundColor={colors.primary}
             colors={['#fff']}
-            style={refreshing && styles.refreshControl}
+            style={refreshing && {backgroundColor: colors.primary}}
             tintColor="#fff"
           />
         }>
         <HeaderTitle title="Pull to Refresh" />
         {refreshing ? (
           <View style={styles.refresh}>
-            <Text>Refrescando los datos</Text>
+            <Text style={{color: colors.text}}>Refrescando los datos</Text>
           </View>
         ) : (
           <View style={styles.content}>
             {data.map(row => (
-              <Text key={row.id}>{JSON.stringify(row, null, 2)}</Text>
+              <Text key={row.id} style={{color: colors.text}}>
+                {JSON.stringify(row, null, 2)}
+              </Text>
             ))}
           </View>
         )}
@@ -81,9 +80,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-  },
-  refreshControl: {
-    backgroundColor: '#5856d6',
   },
   content: {
     paddingVertical: 20,

@@ -10,13 +10,7 @@ interface IProps {
 const FadeInImage = ({uri, style}: IProps) => {
   const {opacity, fadeIn} = useAnimation();
 
-  return (
-    <Animated.Image
-      source={{uri}}
-      style={[style, {opacity}]}
-      onLoad={() => fadeIn(1000)}
-    />
-  );
+  return <Animated.Image source={{uri}} style={[style, {opacity}]} onLoad={() => fadeIn(1000)} />;
 };
 
 export default FadeInImage;

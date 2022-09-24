@@ -1,13 +1,7 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  SectionList,
-  RefreshControl,
-  Text,
-} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {StyleSheet, SafeAreaView, View, SectionList, RefreshControl, Text} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
+import {ThemeContext} from '../context/ThemeContext';
 
 interface Data {
   casa: string;
@@ -17,17 +11,7 @@ interface Data {
 const data: Data[] = [
   {
     casa: 'DC Comics',
-    data: [
-      'Batman',
-      'Superman',
-      'Robin',
-      'Batman',
-      'Superman',
-      'Robin',
-      'Batman',
-      'Superman',
-      'Robin',
-    ],
+    data: ['Batman', 'Superman', 'Robin', 'Batman', 'Superman', 'Robin', 'Batman', 'Superman', 'Robin'],
   },
   {
     casa: 'Marvel Comics',
@@ -48,21 +32,14 @@ const data: Data[] = [
   },
   {
     casa: 'Anime',
-    data: [
-      'Kenshin',
-      'Goku',
-      'Saitama',
-      'Kenshin',
-      'Goku',
-      'Saitama',
-      'Kenshin',
-      'Goku',
-      'Saitama',
-    ],
+    data: ['Kenshin', 'Goku', 'Saitama', 'Kenshin', 'Goku', 'Saitama', 'Kenshin', 'Goku', 'Saitama'],
   },
 ];
 
 const SectionListScreen = () => {
+  const {theme} = useContext(ThemeContext);
+  const {colors} = theme;
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
@@ -76,29 +53,19 @@ const SectionListScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            title="Refrescando"
-          />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} title="Refrescando" />}
         ListHeaderComponent={() => <HeaderTitle title="Section List" />}
-        ListFooterComponent={() => (
-          <HeaderTitle title={`Registros: ${data.length}`} hideIcon />
-        )}
+        ListFooterComponent={() => <HeaderTitle title={`Registros: ${data.length}`} hideIcon />}
         sections={data}
         keyExtractor={(item, index) => item + index}
         renderItem={({item}) => (
           <View style={styles.item}>
-            <Text style={styles.title}>{item}</Text>
+            <Text style={[styles.title, {color: colors.text}]}>{item}</Text>
           </View>
         )}
-        renderSectionHeader={({section}) => (
-          <Text style={styles.header}>{section.casa}</Text>
-        )}
+        renderSectionHeader={({section}) => <Text style={styles.header}>{section.casa}</Text>}
         renderSectionFooter={({section}) => (
-          <Text style={styles.footer}>Registros: {section.data.length}</Text>
+          <Text style={[styles.footer, {color: colors.text}]}>Registros: {section.data.length}</Text>
         )}
         stickySectionHeadersEnabled
       />
@@ -127,6 +94,7 @@ const styles = StyleSheet.create({
   footer: {
     fontSize: 17,
     fontWeight: '600',
+    marginVertical: 8,
   },
 });
 

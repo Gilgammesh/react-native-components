@@ -24,10 +24,10 @@ const useAnimation = () => {
     });
   };
 
-  const fadeOut = () => {
+  const fadeOut = (duration: number = opacityDuration) => {
     Animated.timing(opacity, {
       toValue: opacityInit,
-      duration: opacityDuration,
+      duration,
       useNativeDriver: true,
     }).start(() => {
       setFadestate('fadeIn');

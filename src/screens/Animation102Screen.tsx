@@ -1,8 +1,12 @@
-import React, {useRef} from 'react';
-import {View, StyleSheet, Animated, PanResponder} from 'react-native';
+import React, {useContext, useRef} from 'react';
+import {View, StyleSheet, Animated, PanResponder, SafeAreaView} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
+import {ThemeContext} from '../context/ThemeContext';
 
 const Animation102Screen = () => {
+  const {theme} = useContext(ThemeContext);
+  const {colors} = theme;
+
   const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = PanResponder.create({
@@ -29,24 +33,28 @@ const Animation102Screen = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderTitle title="Animation 02" />
-      <Animated.View
-        {...panResponder.panHandlers}
-        style={[pan.getLayout(), styles.box]}
-      />
-    </View>
+      <View style={styles.containerAnimated}>
+        <Animated.View
+          {...panResponder.panHandlers}
+          style={[pan.getLayout(), styles.box, {backgroundColor: colors.primary}]}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerAnimated: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   box: {
-    backgroundColor: '#75cedb',
     width: 150,
     height: 150,
     borderRadius: 8,

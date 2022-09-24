@@ -28,7 +28,7 @@ export const menuItems: IMenuItem[] = [
   {
     id: 5,
     name: 'TextInputs',
-    icon: 'document-text-outline',
+    icon: 'albums-outline',
     component: 'TextInputScreen',
   },
   {
@@ -54,5 +54,17 @@ export const menuItems: IMenuItem[] = [
     name: 'InfiniteScroll',
     icon: 'download-outline',
     component: 'InfiniteScrollScreen',
+  },
+  {
+    id: 10,
+    name: 'Slides',
+    icon: 'images-outline',
+    component: 'SlidesScreen',
+  },
+  {
+    id: 11,
+    name: 'Theme',
+    icon: 'color-wand-outline',
+    component: 'ThemeScreen',
   },
 ];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   SafeAreaView,
@@ -12,8 +12,12 @@ import {
 import CustomSwitch from '../components/CustomSwitch';
 import HeaderTitle from '../components/HeaderTitle';
 import {useForm} from '../hooks/useForm';
+import {ThemeContext} from '../context/ThemeContext';
 
 const TextInputScreen = () => {
+  const {theme} = useContext(ThemeContext);
+  const {colors} = theme;
+
   const initForm = {
     nombre: '',
     apellido: '',
@@ -27,56 +31,58 @@ const TextInputScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
         <ScrollView>
           <HeaderTitle title="Text Inputs" />
           <View style={styles.containerInputs}>
             <View style={styles.formcontrol}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, {color: colors.text, borderColor: colors.border}]}
                 value={nombre}
                 onChangeText={value => onChange(value, 'nombre')}
                 placeholder="Nombre"
+                placeholderTextColor={colors.divider}
                 autoCapitalize="words"
                 textContentType="name"
               />
             </View>
             <View style={styles.formcontrol}>
-              <Text>{JSON.stringify(form, null, 2)}</Text>
+              <Text style={{color: colors.text}}>{JSON.stringify(form, null, 2)}</Text>
             </View>
             <View style={styles.formcontrol}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, {color: colors.text, borderColor: colors.border}]}
                 value={apellido}
                 onChangeText={value => onChange(value, 'apellido')}
                 placeholder="Apellido"
+                placeholderTextColor={colors.divider}
                 autoCapitalize="words"
                 textContentType="name"
               />
             </View>
             <View style={styles.formcontrol}>
-              <Text>{JSON.stringify(form, null, 2)}</Text>
+              <Text style={{color: colors.text}}>{JSON.stringify(form, null, 2)}</Text>
             </View>
             <View style={styles.formcontrol}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, {color: colors.text, borderColor: colors.border}]}
                 value={dni}
                 onChangeText={value => onChange(value, 'dni')}
                 placeholder="DNI"
+                placeholderTextColor={colors.divider}
                 keyboardType="number-pad"
               />
             </View>
             <View style={styles.formcontrol}>
-              <Text>{JSON.stringify(form, null, 2)}</Text>
+              <Text style={{color: colors.text}}>{JSON.stringify(form, null, 2)}</Text>
             </View>
             <View style={styles.formcontrol}>
               <TextInput
-                style={styles.input}
+                style={[styles.input, {color: colors.text, borderColor: colors.border}]}
                 value={email}
                 onChangeText={value => onChange(value, 'email')}
                 placeholder="Correo"
+                placeholderTextColor={colors.divider}
                 autoCapitalize="none"
                 keyboardType="email-address"
                 autoCorrect={false}
@@ -85,15 +91,12 @@ const TextInputScreen = () => {
             </View>
             <View style={styles.formcontrol}>
               <View style={styles.switchRow}>
-                <Text style={styles.switchText}>Suscribirse</Text>
-                <CustomSwitch
-                  enabled={isSubscribed}
-                  onChange={() => onChange(!isSubscribed, 'isSubscribed')}
-                />
+                <Text style={[styles.switchText, {color: colors.text}]}>Suscribirse</Text>
+                <CustomSwitch enabled={isSubscribed} onChange={() => onChange(!isSubscribed, 'isSubscribed')} />
               </View>
             </View>
             <View style={styles.formcontrol}>
-              <Text>{JSON.stringify(form, null, 2)}</Text>
+              <Text style={{color: colors.text}}>{JSON.stringify(form, null, 2)}</Text>
             </View>
           </View>
         </ScrollView>
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.4)',
     borderRadius: 4,
     padding: 10,
   },

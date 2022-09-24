@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -6,26 +6,26 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {IMenuItem} from '../interfaces/appInterfaces';
 import {RootStackNavigatorParams} from '../navigation/Navigation';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {ThemeContext} from '../context/ThemeContext';
 
 interface IProps {
   item: IMenuItem;
 }
 
 const FlatListMenuItem = ({item: {icon, name, component}}: IProps) => {
-  const navigation =
-    useNavigation<StackNavigationProp<RootStackNavigatorParams>>();
+  const navigation = useNavigation<StackNavigationProp<RootStackNavigatorParams>>();
+
+  const {theme} = useContext(ThemeContext);
+  const {colors} = theme;
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={() => navigation.navigate(component)}>
+    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate(component)}>
       <View style={styles.container}>
         <View style={styles.item}>
-          <Icon name={icon} size={20} color="#151512" style={styles.itemIcon} />
-          <Text style={styles.itemText}>{name}</Text>
+          <Icon name={icon} size={20} color={colors.primary} style={styles.itemIcon} />
+          <Text style={[styles.itemText, {color: colors.text}]}>{name}</Text>
         </View>
-
-        <Icon name="chevron-forward-outline" size={20} />
+        <Icon name="chevron-forward-outline" size={20} color={colors.text} />
       </View>
     </TouchableOpacity>
   );
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#151512',
   },
 });
 
